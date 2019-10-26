@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <link rel="stylesheet" href="css/wysiwyg.css">
+</head>
+<body>
+    <div class="container">
+            <label for="editor">Details</label>
+
+            <textarea name="editor" id="editor" cols="30" rows="10"></textarea>
+    </div>
+    
+    <script src="js/wysiwyg.js"></script>
+    <script>
+        textEditor.init({
+            selector: 'editor'
+        });
+    </script>
+</body>
+</html>
