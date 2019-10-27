@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 document.title = "WYSIWYG Rich Text Editor";
 
@@ -13,12 +13,15 @@ let textEditor = new (function () {
     let self = this;
 
     self.init =  function(args) {
-        // console.log('started');
+
+        // Hide textarea
+        document.getElementById(args.selector).style.display = 'none';
+        
         let defaultElements = [
-            {command: 'bold', type: 'button', innerHtml: 'B'},
-            {command: 'italic', type: 'button', innerHtml: 'I'},
-            {command: 'uderline', type: 'button', innerHtml: 'U'},
-            {command: 'strikeThrough', type: 'button', innerHtml: 'S'},
+            {command: 'bold', type: 'button', innerHTML: 'Bold'},
+            {command: 'italic', type: 'button', innerHTML: 'Italic'},
+            {command: 'uderline', type: 'button', innerHTML: 'Underline'},
+            {command: 'strikeThrough', type: 'button', innerHTML: 'Strike'},
         ];
 
         // Container
@@ -35,18 +38,37 @@ let textEditor = new (function () {
 
         container.appendChild(contentEditable);
 
-        // Hide textarea
-        document.getElementById(args.selector).style.display = 'none';
-
         // Make the iframe editable in the browser
         contentEditable.contentDocument.designMode = "on";
+
+        //  Loop through the buttons
+        let el = 0;
+        for(el in defaultElements) {
+            let thisElement;
+            
+            // Create element
+            let element = document.createElement(defaultElements[el].type);
+            
+            if (el > 0) {
+                thisElement = element;
+            }
+            
+            if (el > 0) {
+                element.appendAfter(thisElement);
+            } else {
+                element.appendBefore(contentEditable);
+            }
+
+            element.innerHTML = defaultElements[el].innerHTML;
+            element.style.margin = '0 5px 5px 0';
+        }
     };
 
     Element.prototype.appendBefore = function(element) {
         element.parentNode.insertBefore(this, element);
     }, false;
 
-    Element.prototype.appendAfter = function(element) {
+    Element.prototype.appendAfter = function (element) {
         element.parentNode.insertBefore(this, element.nextSibling);
     }, false;
 });
