@@ -2,13 +2,6 @@
 
 document.title = "WYSIWYG Rich Text Editor";
 
-// Fonts
-const fonts = {
-    bold: 'fa fa-bold',
-    italic: 'fa fa-italic',
-    underline: 'fa fa-underline'
-};
-
 let textEditor = new (function () {
     let self = this;
 
@@ -16,6 +9,12 @@ let textEditor = new (function () {
 
         // Hide textarea
         document.getElementById(args.selector).style.display = 'none';
+
+        // Fonts
+        const fonts = [
+            'Arial',
+            'sans-serif'
+        ];
         
         let defaultElements = [
             {command: 'bold', type: 'button', innerHTML: 'Bold'},
@@ -43,9 +42,7 @@ let textEditor = new (function () {
 
 
         for(let idx = 0; idx < defaultElements.length; idx++) {
-            // let thisElement;
-            
-            // Create element
+            // Create element for button
             let element = document.createElement(defaultElements[idx].type);
             element.appendBefore(document.getElementById('myRichTextEditorField'));
             
@@ -66,6 +63,7 @@ let textEditor = new (function () {
                 let showCode = false;
                 let isPrompt = false;
 
+                // If its a button add event click to it
                 element.onclick = function () {
                     command = this.getAttribute('title');
                     if (command == 'viewSourceCode') {
@@ -81,7 +79,8 @@ let textEditor = new (function () {
                     }
                 };
             } else {
-                
+                // if it is not a button
+
             }
         }
     };
